@@ -6,6 +6,7 @@
     "start": "yarn react-native start"
   },
   "dependencies": {
+    "jsc-android": "^241213.1.0",
     "react": "16.8.6",
     "react-native": "^0.60.0"
   }

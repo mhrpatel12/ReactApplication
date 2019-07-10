@@ -15,11 +15,12 @@ import com.facebook.react.common.LifecycleState
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 import com.facebook.react.shell.MainReactPackage
 import android.view.KeyEvent.KEYCODE_MENU
+import com.facebook.react.ReactActivity
 
 
-class MainActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
+class MainActivity : ReactActivity(), DefaultHardwareBackBtnHandler {
     override fun invokeDefaultOnBackPressed() {
-        super.onBackPressed();
+        super.onBackPressed()
     }
 
     private val OVERLAY_PERMISSION_REQ_CODE = 1  // Choose any value
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
         mReactInstanceManager = ReactInstanceManager.builder()
             .setApplication(application)
             .setCurrentActivity(this)
-            .setBundleAssetName("index.android.bundle")
+            .setBundleAssetName("index.bundle")
             .setJSMainModulePath("index")
             .addPackage(MainReactPackage())
             .setUseDeveloperSupport(BuildConfig.DEBUG)
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
         mReactRootView?.startReactApplication(mReactInstanceManager, "ReactApplication", null)
 
         setContentView(mReactRootView)
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
@@ -109,4 +111,6 @@ class MainActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
         }
         mReactInstanceManager?.onActivityResult(this, requestCode, resultCode, data)
     }
+
+    override fun getMainComponentName(): String? = "ReactApplication"
 }
